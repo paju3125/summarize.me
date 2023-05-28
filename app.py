@@ -15,6 +15,7 @@ from posTagging import POS_Summary
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
+from nlp_advanced import article_summarize
 
 # Sumy Pkg
 from sumy.parsers.plaintext import PlaintextParser
@@ -92,6 +93,9 @@ def comparer():
         final_summary_posTagging = POS_Summary(rawtext)
         summary_reading_time_posTagging = readingTime(final_summary_posTagging)
         
+        final_summary_adv_nlp = article_summarize(rawtext)
+        summary_reading_time_adv_nlp = readingTime(final_summary_adv_nlp)
+        
         print(final_summary_posTagging)
         # Gensim Summarizer
         # final_summary_gensim = summarize(rawtext)
@@ -105,7 +109,7 @@ def comparer():
 
         end = time.time()
         final_time = end-start
-        return render_template('compare_summary.html',ctext=rawtext,final_summary_spacy=final_summary_spacy,final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,final_summary_sumy=final_summary_sumy,summary_reading_time_sumy=summary_reading_time_sumy, final_summary_posTagging=final_summary_posTagging, summary_reading_time_posTagging=summary_reading_time_posTagging)
+        return render_template('compare_summary.html',ctext=rawtext,final_summary_spacy=final_summary_spacy,final_time=final_time,final_reading_time=final_reading_time,summary_reading_time=summary_reading_time,final_summary_sumy=final_summary_sumy,summary_reading_time_sumy=summary_reading_time_sumy, final_summary_posTagging=final_summary_posTagging, summary_reading_time_posTagging=summary_reading_time_posTagging, summary_reading_time_adv_nlp=summary_reading_time_adv_nlp,final_summary_adv_nlp = final_summary_adv_nlp)
     return render_template('compare_template.html')
 
 # Sumy 
