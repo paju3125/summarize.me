@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TEXT SUMMARIZER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/unicons.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>summarize.me - Text Summarization Tool</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{url_for('static', filename='assets/images/logo.png')}}" type="image/x-icon">
+
+    <!-- Bootstrap core CSS
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/style.css')}}">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/fontawesome.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/templatemo-cyborg-gaming.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/animate.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav ">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <!-- <img src="{{url_for('static', filename='assets/images/logo.png')}}" alt=""> -->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3 class="animate-charcter">summerize.me</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Search End ***** -->
+                        <div class="search-input">
+                            <form id="search" action="#">
+                                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+                                <i class="fa fa-search"></i>
+                            </form>
+                        </div>
+                        <!-- ***** Search End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/" class="active">Home</a></li>
+                            <li><a href="/compare_summary" class="active">Compare</a></li>
+                            <li></li>
+                            <!-- <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li> -->
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- <div class="navbar-fixed">
+        <nav class="grey darken-4" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">TEXT SUMMARIZER</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{url_for('index')}}">HOME</a></li>
+                    <li><a href="{{url_for('compare_summary')}}">COMPARE</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger">MENU</a>
+            </div>
+        </nav>
+    </div> -->
+
+    <div class="page-content">
+        <div class="most-popular">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="">
+                        <h3 align="center" style="color: rgb(255, 255, 255);">COMPARE</h3>
+                        <form method="POST" class="item mt-2" action="/comparer">
+                            <textarea name="rawtext" placeholder="Enter text here.." title=" " required></textarea>
+                            <br/>
+                            <div class="flex-parent jc-center">
+                                <button type="reset" class="btn btn-small btn-danger">CLEAR</button>
+                                <button type="submit" class="btn btn-small btn-success mx-2">SUMMARIZE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content ">
+        <div class="most-popular">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m8">
+                            <div class="icon-block">
+                                <h4 align="center">INPUT TEXT</h4>
+                                <!-- <h5 class="my-2">READING TIME: <span class="badge badge-info">{{ final_reading_time }} MINUTES </span></h5> -->
+                                <p>READING TIME: <span style="color:#0091EA;">{{ final_reading_time }} MINUTES </span></p>
+                                <p class="light">{{ctext}}</p>
+                                <div class="alert alert-info" role="alert">
+                                    <p>TIME ELAPSED: <span style="color:#ff0000;">{{ final_time }} MINUTES </span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s3">
+                                    <a href="#tab1" class="black-text"><b>POS TAGGING</b></a>
+                                </li>
+                                <li class="tab col s3">
+                                    <a href="#tab2" class="black-text"><b>NATURAL LANGUAGE TOOLKIT</b></a>
+                                </li>
+                                <li class="tab col s3">
+                                    <a href="#tab3" class="black-text"><b>SPACY SUMMARIZER</b></a>
+                                </li>
+                                <li class="tab col s3">
+                                    <a href="#tab4" class="black-text"><b>SUMY LEXRANK</b></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="tab1" class="col s12">
+                            <h5>POS Tagging</h5>
+                            <div class="">
+                                <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_posTagging }} MINUTES </span></p>
+                            </div>
+                            <div class="grey darken-3">
+                                <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_posTagging }}</p>
+                            </div>
+                        </div>
+                        <div id="tab2" class="col s12">
+                            <h5>NLTK</h5>
+                            <div class="">
+                                <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_nltk }} MINUTES </span></p>
+                            </div>
+                            <div class="grey darken-3">
+                                <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_nltk }}</p>
+                            </div>
+                        </div>
+                        <div id="tab3" class="col s12">
+                            <h5>SpaCy</h5>
+                            <div class="">
+                                <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time }} MINUTES  </span></p>
+                            </div>
+                            <div class="grey darken-3">
+                                <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_spacy }}</p>
+                            </div>
+                        </div>
+                        <div id="tab4" class="col s12">
+                            <h5>Sumy</h5>
+                            <div class="">
+                                <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_sumy}} MINUTES </span></p>
+                            </div>
+                            <div class="grey darken-3">
+                                <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_sumy }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class=" py-5">
+                    <!-- <div class="row"> -->
+                    <div class="p-5 rounded shadow mb-5" style="background-color: #1f2122;">
+                        <!-- Lined tabs-->
+                        <ul id="myTab2" role="tablist" class="nav nav-tabs nav-pills nav-fill with-arrow lined flex-column flex-sm-row text-center">
+                            <li class="nav-item flex-sm-fill" role="presentation">
+                                <a id="pos-tab" href="#pos_summary" role="tab" data-bs-toggle="tab" aria-controls="pos_summary" aria-selected="true" class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0 active">POS TAGGING</a>
+                            </li>
+                            <li class="nav-item flex-sm-fill" role="presentation">
+                                <a id="profile2-tab" data-bs-toggle="tab" href="#profile2" role="tab" aria-controls="profile2" aria-selected="false" class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">Natural Language Toolkit</a>
+                            </li>
+                            <li class="nav-item flex-sm-fill" role="presentation">
+                                <a id="contact2-tab" data-bs-toggle="tab" href="#contact2" role="tab" aria-controls="contact2" aria-selected="false" class="nav-link text-uppercase font-weight-bold rounded-0">SPACY</a>
+                            </li>
+                            <li class="nav-item flex-sm-fill" role="presentation">
+                                <a id="sumy-tab" data-bs-toggle="tab" href="#summy_summary" role="tab" aria-controls="summy_summary" aria-selected="false" class="nav-link text-uppercase font-weight-bold rounded-0">Summy Summarizer</a>
+                            </li>
+                        </ul>
+                        <div id="myTab2Content" class="tab-content">
+                            <div id="pos_summary" role="tabpanel" aria-labelledby="pos-tab" class="tab-pane fade px-4 py-5 show active">
+                                <h5>POS Tagging</h5>
+                                <div class="">
+                                    <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_posTagging }} MINUTES </span></p>
+                                </div>
+                                <div class="grey darken-3">
+                                    <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_posTagging }}</p>
+                                </div>
+                            </div>
+                            <div id="profile2" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-4 py-5">
+                                <h5>NLTK</h5>
+                                <div class="">
+                                    <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_nltk }} MINUTES </span></p>
+                                </div>
+                                <div class="grey darken-3">
+                                    <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_nltk }}</p>
+                                </div>
+                            </div>
+                            <div id="contact2" role="tabpanel" aria-labelledby="contact-tab" class="tab-pane fade px-4 py-5">
+                                <h5>SpaCy</h5>
+                                <div class="">
+                                    <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time }} MINUTES  </span></p>
+                                </div>
+                                <div class="grey darken-3">
+                                    <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_spacy }}</p>
+                                </div>
+                            </div>
+                            <div id="summy_summary" role="tabpanel" aria-labelledby="summy-tab" class="tab-pane fade px-4 py-5">
+                                <h5>Sumy</h5>
+                                <div class="">
+                                    <p>READING TIME: <span style="color:#0091EA;">{{ summary_reading_time_sumy}} MINUTES </span></p>
+                                </div>
+                                <div class="grey darken-3">
+                                    <p style="padding:5px; font-size:14px; color: #ffffff;">{{ final_summary_sumy }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End lined tabs -->
+
+                        <!-- <ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="ex2-tab-1" data-bs-toggle="tab" href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">Link</a
+                          >
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a
+                            class="nav-link"
+                            id="ex2-tab-2"
+                            data-bs-toggle="tab"
+                            href="#ex2-tabs-2"
+                            role="tab"
+                            aria-controls="ex2-tabs-2"
+                            aria-selected="false"
+                            >Very very very very long link</a
+                          >
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a
+                            class="nav-link"
+                            id="ex2-tab-3"
+                            data-bs-toggle="tab"
+                            href="#ex2-tabs-3"
+                            role="tab"
+                            aria-controls="ex2-tabs-3"
+                            aria-selected="false"
+                            >Another link</a
+                          >
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="ex2-content">
+                        <div
+                          class="tab-pane fade show active"
+                          id="ex2-tabs-1"
+                          role="tabpanel"
+                          aria-labelledby="ex2-tab-1"
+                        >
+                          Tab 1 content
+                        </div>
+                        <div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
+                          Tab 2 content
+                        </div>
+                        <div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel" aria-labelledby="ex2-tab-3">
+                          Tab 3 content
+                        </div>
+                      </div> -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="{{url_for('static', filename='assets/js/materialize.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/init.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+
+    <script src="{{url_for('static', filename='assets/js/owl-carousel.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/tabs.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/popup.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/custom.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/js/main.js')}}"></script>
+
+</body>
+
+</html>
