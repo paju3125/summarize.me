@@ -53,5 +53,5 @@ def rank_sentences(sentences):
 def POS_Summary(raw_text):
     sentences = nltk.sent_tokenize(raw_text)
     ranked_sentences = rank_sentences(sentences)
-    summary = " ".join(ranked_sentences[:5])
+    summary = " ".join(ranked_sentences[:8])
     return summary

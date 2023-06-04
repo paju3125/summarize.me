@@ -42,7 +42,7 @@ def text_summarizer(raw_docx):
                         sentence_scores[sent] += word_frequencies[word.text.lower()]
 
 
-    summarized_sentences = nlargest(7, sentence_scores, key=sentence_scores.get)
+    summarized_sentences = nlargest(10, sentence_scores, key=sentence_scores.get)
     final_sentences = [ w.text for w in summarized_sentences ]
     summary = ' '.join(final_sentences)
     return summary
