@@ -372,9 +372,16 @@ def preprocessTxt():
 
 @app.route('/generateSummary', methods=['GET', 'POST'])
 def generateSummary():
-    preprocessed_text = request.form.get('preprocessed_text')
+    
+    data = request.json
+    print(data)
+    print(type(data))
+    preprocessed_text = data['response']['preprocessed_text']
     print(preprocessed_text)
     # Define PEGASUS model
+    
+    model_name = data['additionalData']
+    print(model_name)
     
     # Create tokens
     tokens = pegasus_tokenizer(preprocessed_text, truncation=True, padding="longest", return_tensors="pt")

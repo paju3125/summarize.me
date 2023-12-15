@@ -16,6 +16,12 @@
             btn.form.firstElementChild.disabled = true;
 
             $('#btnTxt').text('Preprocessing')
+
+            // Additional data to send with the request
+            let additionalData = {
+                model_name: 'pegasus'
+            };
+
             $.ajax({
                 type: "post",
                 url: "/preprocess",
@@ -28,8 +34,9 @@
                     $.ajax({
                         type: "post",
                         url: "/generateSummary",
-                        data: response,
-                        // dataType: "dataType",
+                        data: JSON.stringify({ response, additionalData: additionalData }),
+                        contentType: 'application/json',
+                        dataType: "json",
                         success: function(response) {
                             console.log(response)
                             console.log(response.summary)

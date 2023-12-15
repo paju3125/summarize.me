@@ -263,6 +263,7 @@ contractions_dict = {
 "you’re": "you are",
 "you’ve": "you have",
 }
+
 contractions_re = re.compile('(%s)' % '|'.join(contractions_dict.keys()))
 # Function to clean the html from the article
 def cleanhtml(raw_html):
