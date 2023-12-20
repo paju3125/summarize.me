@@ -96,14 +96,6 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="row">
-                                            <form action='/' class="item" id="userInputForm" method="post">
-                                                <div class="formgroup">
-                                                    <textarea id="message" name="text" placeholder="Enter text here.." title=" " required></textarea>
-                                                    <button type="submit" id="genSummary"><span id="btnTxt">Generate Summary</span><span class="spinner"></span></button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="row mt-2">
                                             <form action='/' class="item" id="urlInputForm" method="post">
                                                 <div class="formgroup">
                                                     <input type="text" id="url" name="url" placeholder="Paste URL here.." title=" " required />
@@ -111,9 +103,20 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        <div class="row mt-2">
+                                            <form action='/' class="item" id="userInputForm" method="post">
+                                                <div class="formgroup">
+                                                    <textarea id="message" name="text" placeholder="Enter text here.." title=" " required></textarea>
+                                                    <button type="submit" id="genSummary"><span id="btnTxt">Generate Summary</span><span class="spinner"></span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-6 col-sm-12">
-                                        <form action="" class="item">
+                                        <h2 class="p-3 mt-3 text-center">Summary</h2>
+                                        <h3 class="text-center">(Pegasus)</h3>
+                                        <form action="" class="item mt-5">
                                             <div class="formgroup">
                                                 <textarea id="pegasus_summary" name="message" readonly></textarea>
                                             </div>

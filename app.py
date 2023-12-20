@@ -3,7 +3,7 @@ from flask import render_template
 from flask import Flask
 from flask import request
 
-from flask import Flask,render_template,url_for,request
+from flask import Flask,render_template,url_for,request, jsonify
 
 from spacy_summarization import text_summarizer
 
@@ -372,16 +372,21 @@ def preprocessTxt():
 
 @app.route('/generateSummary', methods=['GET', 'POST'])
 def generateSummary():
-    
-    data = request.json
-    print(data)
+    print('hiii')
+    data = request.get_json()
+    # print(data)
     print(type(data))
-    preprocessed_text = data['response']['preprocessed_text']
+    preprocessed_text = data.get('preprocessed_text')
     print(preprocessed_text)
+    # print(type(data))
+    # preprocessed_text = data['response']['preprocessed_text']
+    
+    # preprocessed_text = request.form.get('preprocessed_text')
+    # print(preprocessed_text)
     # Define PEGASUS model
     
-    model_name = data['additionalData']
-    print(model_name)
+    # model_name = data['additionalData']
+    # print(model_name)
     
     # Create tokens
     tokens = pegasus_tokenizer(preprocessed_text, truncation=True, padding="longest", return_tensors="pt")

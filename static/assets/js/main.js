@@ -34,9 +34,9 @@
                     $.ajax({
                         type: "post",
                         url: "/generateSummary",
-                        data: JSON.stringify({ response, additionalData: additionalData }),
+                        data: JSON.stringify(response),
                         contentType: 'application/json',
-                        dataType: "json",
+                        // dataType: "json",
                         success: function(response) {
                             console.log(response)
                             console.log(response.summary)
@@ -89,8 +89,8 @@
                             $.ajax({
                                 type: "post",
                                 url: "/generateSummary",
-                                data: response,
-                                // dataType: "dataType",
+                                data: JSON.stringify(response),
+                                contentType: 'application/json',
                                 success: function(response) {
                                     console.log(response)
                                     console.log(response.summary)
